@@ -7,5 +7,5 @@ namespace Anax\View;
  */
 
 ?><article>
-<p><?= $data["ipAdress"]?></p>
+<p><?= json_encode($data)?></p>
 </article>

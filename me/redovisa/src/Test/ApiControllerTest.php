@@ -36,18 +36,22 @@ class ApiControllerTest extends TestCase
     /**
      * Test the route "index".
      */
-    public function testIndexAction()
-    {
-        $controller = new RestApiController();
-        $res = $controller->indexAction();
-        $this->assertIsObject($res);
-    }
 
     public function testCheckActionPost() {
+        $json = [
+            "message" => __METHOD__ . "POST",
+            "body" => $body,
+        ]
         $ipCheck = new IpCheck();
-        $ipCheck->check("127.0.0.1");
+        $res = json_encode($ipCheck->check("127.0.0.1"));
+        $this->assertContains($res);
+
+
+
         //check that $ipcheck is an json object
 
 
     }
+
+
 }

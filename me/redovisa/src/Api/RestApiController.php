@@ -16,30 +16,17 @@ class RestApiController implements ContainerInjectableInterface
     /**
      * function checks if input is an ip address and if so, if it's PIv4 or Ipv6
      */
-    public function indexAction()
-    {
-        $request = $this->di->get("request");
-        $getParams = $request->getGet();
-        if ($getParams) {
-            $ip = $getParams["ipCheck"];
-            $ipCheck = new IpCheck();
-            $data = [
-                "ipAdress" => json_encode($ipCheck->check($ip))
-            ];
-        } else {
-            $data = ["ipAdress" => "no ip address"];
-        }
-        $page = $this->di->get("page");
-        $page->add("ip_json_view/check", $data);
-        return $page->render($data);
-    }
+//    public function indexAction()
+//    {
+
+//    }
 
     public function checkActionPost()
     {
         $request = $this->di->get("request");
         $ip = $request->getPost("ipCheck");
         $ipCheck = new IpCheck();
-        $ipCheck->check($ip);
-        return $this->di->response->redirect("http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck?ipCheck=$ip");
+        $res = json_encode($ipCheck->check($ip));
+        return $res;
     }
 }
