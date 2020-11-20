@@ -7,7 +7,7 @@ return [
         [
             "info" => "Ip Json Controller",
             "mount" => "ip_json_view",
-            "handler" => "\Asti\Controller\IpJsonController",
+            "handler" => "\Asti\Ipcheck\IpJsonController",
         ],
     ]
 ];

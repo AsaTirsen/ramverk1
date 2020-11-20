@@ -1,6 +1,6 @@
 <?php
 
-namespace Asti\Controller;
+namespace Asti\Ipcheck;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
@@ -40,17 +40,18 @@ class IpJsonController implements ContainerInjectableInterface
 
     public function checkActionGet() {
         $request = $this->di->get("request");
-        $ip = $request->getGet("ipCheck");
-        $data = $this->postDataThroughCurl($ip);
+        $ipAdress = $request->getGet("ipCheck");
+        $data = $this->postDataThroughCurl($ipAdress);
         $page = $this->di->get("page");
         $page->add("ip_json_view/check", $data);
         return $page->render($data);
     }
 
-    public function postDataThroughCurl($ip) {
+
+    public function postDataThroughCurl($ipAdress) {
         $url = "http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck/check";
 
-        $postRequest = ['ipCheck' => $ip];
+        $postRequest = ['ipCheck' => $ipAdress];
 
         //  Initiate curl handler
         $curlConnection = curl_init($url);

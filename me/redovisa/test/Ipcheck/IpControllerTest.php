@@ -1,6 +1,6 @@
 <?php
 
-namespace Asti\Api;
+namespace Asti\Ipcheck;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -8,8 +8,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the SampleController.
  */
-class ApiControllerTest extends TestCase
+class IpControllerTest extends TestCase
 {
+
+    protected $di;
     /**
      * Prepare before each test.
      */
@@ -28,30 +30,20 @@ class ApiControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
-        $this->controller = new RestApiController();
+        $this->controller = new IpController();
         $this->controller->setDI($this->di);
-        $this->controller->initialize();
     }
 
     /**
      * Test the route "index".
      */
 
-    public function testCheckActionPost() {
-        $json = [
-            "message" => __METHOD__ . "POST",
-            "body" => $body,
-        ]
-        $ipCheck = new IpCheck();
-        $res = json_encode($ipCheck->check("127.0.0.1"));
-        $this->assertContains($res);
-
-
-
-        //check that $ipcheck is an json object
+    public function testIndexAction() {
+        $helpfn = new HelperFunctions();
+        $data = ["ipAdress" => $helpfn->checkWhichTypeOfIp('127.0.0.1')];
+        $this->assertContains( "That is an IPv4 address with the domain name: localhost", $data);
+        $data = ["ipAdress" => $helpfn->checkWhichTypeOfIp('127.0.0.1')];
 
 
     }
-
-
 }

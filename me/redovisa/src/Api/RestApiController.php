@@ -24,9 +24,9 @@ class RestApiController implements ContainerInjectableInterface
     public function checkActionPost()
     {
         $request = $this->di->get("request");
-        $ip = $request->getPost("ipCheck");
+        $ipAdress =$request->getPost("ipCheck");
         $ipCheck = new IpCheck();
-        $res = json_encode($ipCheck->check($ip));
+        $res = json_encode($ipCheck->check($ipAdress));
         return $res;
     }
 }

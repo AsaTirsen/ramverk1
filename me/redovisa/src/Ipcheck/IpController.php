@@ -1,10 +1,10 @@
 <?php
 
-namespace Asti\Controller;
+namespace Asti\Ipcheck;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-
+use Asti\Ipcheck\HelperFunctions;
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
 // use Anax\Route\Exception\InternalErrorException;
@@ -22,23 +22,24 @@ class IpController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-    /**
-     * function checks if input is an ip address and if so, if it's PIv4 or Ipv6
-     */
-    public function checkWhichTypeOfIp(string $ip): string
-    {
-        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
-            $hostname = gethostbyaddr($ip);
-            return "That is an IPv6 address with the domain name: " . $hostname;
-        } else if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
-            $hostname = gethostbyaddr($ip);
-            return "That is an IPv4 address with the domain name: " . $hostname;
-        } else {
-            var_dump($ip);
-            return "That is not a valid IP-adress";
-        }
-    }
-
+//    /**
+//     *
+//     * function checks if input is an ip address and if so, if it's PIv4 or Ipv6
+//     */
+//    public function checkWhichTypeOfIp(string $ipAdress): string
+//    {
+//        if (filter_var($ipAdress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+//            $hostname = gethostbyaddr($ipAdress);
+//            return "That is an IPv6 address with the domain name: " . $hostname;
+//        } else if (filter_var($ipAdress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+//            $hostname = gethostbyaddr($ipAdress);
+//            return "That is an IPv4 address with the domain name: " . $hostname;
+//        } else {
+//            var_dump($ipAdress);
+//            return "That is not a valid IP-adress";
+//        }
+//    }
+//
 
 
     /**
@@ -55,11 +56,11 @@ class IpController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $request = $this->di->get("request");
         $getParams = $request->getGet();
-
+        $helpfn = new HelperFunctions();
         if ($getParams) {
-            $ip = $getParams["ipCheck"];
+            $ipAdr = $getParams["ipCheck"];
             $data = [
-                "ipAdress" => $this->checkWhichTypeOfIp($ip),
+                "ipAdress" => $helpfn->checkWhichTypeOfIp($ipAdr),
             ];
             $page->add("ip_view/ip-check-result", $data);
             return $page->render($data);

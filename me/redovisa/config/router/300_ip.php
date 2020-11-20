@@ -7,7 +7,7 @@ return [
         [
             "info" => "Ip Controller",
             "mount" => "ip_view",
-            "handler" => "\Asti\Controller\IpController",
+            "handler" => "\Asti\Ipcheck\IpController",
         ],
     ]
 ];
