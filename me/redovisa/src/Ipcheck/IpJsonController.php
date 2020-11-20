@@ -49,7 +49,8 @@ class IpJsonController implements ContainerInjectableInterface
 
 
     public function postDataThroughCurl($ipAdress) {
-        $url = "http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck/check";
+        //$url = "http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck/check";
+        $url = "http://www.student.bth.se/~asti18/dbwebb-kurser/ramverk1/me/redovisa/htdocs/api/ipcheck/check";
 
         $postRequest = ['ipCheck' => $ipAdress];
 
