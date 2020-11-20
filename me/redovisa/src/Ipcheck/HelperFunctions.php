@@ -2,12 +2,6 @@
 
 namespace Asti\Ipcheck;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
-
-// use Anax\Route\Exception\ForbiddenException;
-// use Anax\Route\Exception\NotFoundException;
-// use Anax\Route\Exception\InternalErrorException;
 
 /**
  * A sample controller to show how a controller class can be implemented.
@@ -34,7 +28,6 @@ class HelperFunctions
             $hostname = gethostbyaddr($ipAdress);
             return "That is an IPv4 address with the domain name: " . $hostname;
         } else {
-            var_dump($ipAdress);
             return "That is not a valid IP-adress";
         }
     }

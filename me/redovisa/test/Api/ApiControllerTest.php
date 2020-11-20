@@ -3,6 +3,7 @@
 namespace Asti\Api;
 
 use Anax\DI\DIFactoryConfig;
+use Anax\Request\Request;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -39,19 +40,34 @@ class ApiControllerTest extends TestCase
      */
 
     public function testCheckActionPost() {
-        $ipCheck = new IpCheck();
-        $res = json_encode($ipCheck->check("127.0.0.1"));
-        $this->assertIsString($res);
-        $this->assertContains('"Valid":true', $res);
-        $res = json_encode($ipCheck->check("0.0.1"));
-        $this->assertContains('"Valid":false', $res);
-        $res = json_encode($ipCheck->check("2607:f8b0:4004:80a::200e"));
-        $this->assertContains('"Valid":true', $res);
-        $ipAdress = $this->di->get("request")->getPost();
-        $json = [
-            "message" => __METHOD__. "POST",
-            "ipAdress" => $ipAdress
-        ];
-        return $json;
+        $req = new Request();
+        $req->setPost("ipCheck", "127.0.0.1");
+        $this->di->set("request", $req);
+        $res = $this->controller->checkActionPost();
+        $this->assertContains('"IPv4":"127.0.0.1"', $res);
+        $req->setPost("ipCheck", "12");
+        $this->di->set("request", $req);
+        $res = $this->controller->checkActionPost();
+        $this->assertContains('"DomainName":"false"', $res);
+        $req->setPost("ipCheck", "2607:f8b0:4004:80a::200e");
+        $this->di->set("request", $req);
+        $res = $this->controller->checkActionPost();
+        $this->assertContains('"IPv6":"2607:f8b0:4004:80a::200e"', $res);
+
+//
+//        $ipCheck = new IpCheck();
+//        $res = json_encode($ipCheck->check("127.0.0.1"));
+//        $this->assertIsString($res);
+//        $this->assertContains('"Valid":true', $res);
+//        $res = json_encode($ipCheck->check("0.0.1"));
+//        $this->assertContains('"Valid":false', $res);
+//        $res = json_encode($ipCheck->check("2607:f8b0:4004:80a::200e"));
+//        $this->assertContains('"Valid":true', $res);
+//        $ipAdress = $this->di->get("request")->getPost();
+//        $json = [
+//            "message" => __METHOD__. "POST",
+//            "ipAdress" => $ipAdress
+//        ];
+//        return $json;
     }
 }

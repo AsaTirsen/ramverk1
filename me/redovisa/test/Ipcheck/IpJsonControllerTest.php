@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the SampleController.
  */
-class IpControllerTest extends TestCase
+class IpJsonControllerTest extends TestCase
 {
 
     protected $di;
@@ -31,7 +31,7 @@ class IpControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
-        $this->controller = new IpController();
+        $this->controller = new IpJsonController();
         $this->controller->setDI($this->di);
     }
 
@@ -42,10 +42,12 @@ class IpControllerTest extends TestCase
     public function testIndexAction() {
         $res = $this->controller->indexAction();
         $this->assertIsObject($res);
+    }
+
+    public function testCheckActionGet() {
         $req = new Request();
-        $this->di->set("request", $req);
         $req->setGet("ipCheck", "127.0.0.1");
-        $res = $this->controller->indexAction();
+        $res = $this->controller->checkActionGet();
         $this->assertIsObject($res);
     }
 }
