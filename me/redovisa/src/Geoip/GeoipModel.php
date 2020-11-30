@@ -1,9 +1,18 @@
 <?php
 
-namespace Asti\Api;
+namespace Asti\Geoip;
 
-class IpCheck
+
+class GeoipModel
 {
+    /*
+     * recieves data
+     * decodes json
+     * recodes json with slimmer data
+     * returns object to GeoIpCpntroller with di
+     *
+     */
+
     public function check(string $ipAdress)
     {
         $isIPv6 = filter_var($ipAdress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
@@ -19,6 +28,8 @@ class IpCheck
             "IPv6" => $isIPv6,
             "UserInput" => $ipAdress,
             "DomainName" => $hostname,
+
         ];
     }
+
 }
