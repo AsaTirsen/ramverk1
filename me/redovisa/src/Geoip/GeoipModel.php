@@ -18,9 +18,11 @@ class GeoipModel
             $service = new GeoipService();
             $res = $service->curlIpApi($ipAdr);
         return (object)[
-            "Valid" => $res["type"] = "ipv4" || "ipv6",
             "Type" => $res["type"],
+            "Valid" => $res["type"] = "ipv4" || "ipv6",
             "UserInput" => $res["ip"],
+            "Latitude" => $res["latitude"],
+            "Longitude" => $res["longitude"],
             "Country" => $res["country_code"],
         ];
 

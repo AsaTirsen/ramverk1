@@ -40,15 +40,6 @@ class GeoipService
     public function curlIpApi($ipAdr) : array
     {
         $curl = new CurlModel();
-        if ($ipAdr = "") {
-            return $curl->getDataThroughCurl($this->getUrl());
-        }
         return $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
     }
-
-//    public function curlWithoutIp() : array
-//    {
-//        $curl = new CurlModel();
-//        return $curl->getDataThroughCurl($this->getUrl());
-//    }
 }

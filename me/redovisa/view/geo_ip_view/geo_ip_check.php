@@ -15,11 +15,10 @@ namespace Anax\View;
 <form method="get">
     <fieldset>
         <input type="hidden" name="route" value="check">
-        <?= $ipAdress = ""; ?>
         <p>
             <label>Skriv din IP-adress:</label>
             <label>
-                <input type="text" name="ipCheck" value="<?= $ipAdress ?>"/>
+                <input type="text" name="ipCheck" value="<?= $_SERVER['REMOTE_ADDR']?>"/>
             </label>
         </p>
         <p>

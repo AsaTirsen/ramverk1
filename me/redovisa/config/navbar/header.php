@@ -58,5 +58,15 @@ return [
             "url" => "ip_json_view",
             "title" => "Kontrollera en IP-adress",
         ],
+        [
+            "text" => "GEO-IP-JSON-check",
+            "url" => "geo_ip_json_view",
+            "title" => "Kontrollera en IP-adress",
+        ],
+        [
+            "text" => "GEO-IP-check",
+            "url" => "geo_ip_view",
+            "title" => "Kontrollera en IP-adress",
+        ],
     ],
 ];

@@ -41,11 +41,8 @@ class GeoipController implements ContainerInjectableInterface
             $page->add("geo_ip_view/geo_ip_result", $data);
             return $page->render($data);
         }
-        $data = [
-            "content" => json_encode($ipLookup->check(""))
-        ];
-        $page->add("geo_ip_view/geo_ip_result", $data);
-        return $page->render($data);
+        $page->add("geo_ip_view/geo_ip_check");
+        return $page->render();
     }
 
 
