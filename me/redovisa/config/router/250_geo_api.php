@@ -6,8 +6,8 @@ return [
     "routes" => [
         [
             "info" => "Geo API Controller",
-            "mount" => "api/ipcheck",
-            "handler" => "\Asti\Api\GeoApiController",
+            "mount" => "api/geocheck",
+            "handler" => "\Asti\Api\GeoController",
         ],
     ]
 ];

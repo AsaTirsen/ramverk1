@@ -22,7 +22,7 @@ namespace Anax\View;
         </p>
 
     </div>
-    <form method="post" action="api/ipcheck/check">
+    <form method="post" action="api/geocheck/check">
         <fieldset>
             <?= $ipAdress = ""; ?>
             <p>

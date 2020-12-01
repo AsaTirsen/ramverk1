@@ -4,7 +4,6 @@ namespace Asti\Api;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Asti\Api\IpCheck;
 
 /**
  * A test controller to show off using a model.
@@ -29,5 +28,4 @@ class RestApiController implements ContainerInjectableInterface
         $res = json_encode($ipCheck->check($ipAdress));
         return $res;
     }
-
 }
