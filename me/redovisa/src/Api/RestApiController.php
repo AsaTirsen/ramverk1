@@ -29,4 +29,5 @@ class RestApiController implements ContainerInjectableInterface
         $res = json_encode($ipCheck->check($ipAdress));
         return $res;
     }
+
 }

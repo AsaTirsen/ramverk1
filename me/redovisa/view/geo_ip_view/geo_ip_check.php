@@ -14,7 +14,7 @@ namespace Anax\View;
 
 <form method="get">
     <fieldset>
-        <input type="hidden" name="route" value="ip-check">
+        <input type="hidden" name="route" value="check">
         <?= $ipAdress = ""; ?>
         <p>
             <label>Skriv din IP-adress:</label>

@@ -7,5 +7,5 @@ namespace Anax\View;
  */
 
 ?><article>
-<p><?= $data["ipAdress"]?></p>
+<p><?= $data["content"]?></p>
 </article>

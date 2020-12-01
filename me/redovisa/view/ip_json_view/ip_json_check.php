@@ -22,13 +22,12 @@ namespace Anax\View;
         </p>
 
     </div>
-    <form method="get" action="ip_json_view/check">
+    <form method="post" action="api/ipcheck/check">
         <fieldset>
-            <?= $ipAdress = ""; ?>
             <p>
                 <label>Skriv din IP-adress:</label>
                 <label>
-                    <input type="text" name="ipCheck" value="<?= $ipAdress ?>"/>
+                    <input type="text" name="ipCheck" value=""/>
                 </label>
             </p>
             <p>

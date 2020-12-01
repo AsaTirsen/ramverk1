@@ -12,23 +12,43 @@ class GeoipService
      * sends response to model
      *
      */
+//
+//    private $key = null;
+//    private $url = null;
+//
+//    public function setKey() : void
+//    {
+//        $this->key = "52ca019cf35f1e86f782ed09916211c8";
+//    }
+//
+//    public function setUrl() : void
+//    {
+//        $this->url = "http://api.ipstack.com/";
+//    }
+//
 
-    private $key = null;
-    private $url = null;
-
-    public function setKey($key) : void
+    public function getKey() : string
     {
-        $this->key = $key;
+        return "52ca019cf35f1e86f782ed09916211c8";
     }
 
-    public function setUrl($url) : void
+    public function getUrl() : string
     {
-        $this->url = $url;
+        return "http://api.ipstack.com/";
     }
 
-    public function curlIpApi() : string
-    {   $ip = "134.201.250.155";
+    public function curlIpApi($ipAdr) : array
+    {
         $curl = new CurlModel();
-        return $curl->getDataThroughCurl($this->url, $this->key, $ip);
+        if ($ipAdr = "") {
+            return $curl->getDataThroughCurl($this->getUrl());
+        }
+        return $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
     }
+
+//    public function curlWithoutIp() : array
+//    {
+//        $curl = new CurlModel();
+//        return $curl->getDataThroughCurl($this->getUrl());
+//    }
 }

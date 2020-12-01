@@ -4,6 +4,7 @@ namespace Asti\Ipcheck;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use function Anax\View\redirect;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -70,7 +71,6 @@ class IpJsonController implements ContainerInjectableInterface
 
         $json = json_decode($apiResponse, true);
         return $json;
-
     }
 
 //    public function getDataThroughCurl(string $ip)

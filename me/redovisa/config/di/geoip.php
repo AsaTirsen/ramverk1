@@ -23,7 +23,6 @@ return [
             // and set it up.
             "callback" => function () {
                 $geoipService = new GeoipService();
-
                 // Load the configuration files
                 $cfg = $this->get("configuration");
                 $config = $cfg->load("geoip.php");
