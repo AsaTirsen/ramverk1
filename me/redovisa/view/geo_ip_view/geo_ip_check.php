@@ -18,7 +18,7 @@ namespace Anax\View;
         <p>
             <label>Skriv din IP-adress:</label>
             <label>
-                <input type="text" name="ipCheck" value="<?= $_SERVER['REMOTE_ADDR']?>"/>
+                <input type="text" name="ipCheck" value="<?= $ipAdress?>"/>
             </label>
         </p>
         <p>

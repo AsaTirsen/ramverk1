@@ -41,7 +41,10 @@ class GeoipController implements ContainerInjectableInterface
             $page->add("geo_ip_view/geo_ip_result", $data);
             return $page->render($data);
         }
-        $page->add("geo_ip_view/geo_ip_check");
-        return $page->render();
+        $data = [
+            "ipAdress" => $_SERVER['REMOTE_ADDR']
+        ];
+        $page->add("geo_ip_view/geo_ip_check", $data);
+        return $page->render($data);
     }
 }

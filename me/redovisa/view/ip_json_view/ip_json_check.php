@@ -18,7 +18,9 @@ namespace Anax\View;
         <h3>Metod 2: Använd en klient t.ex. Postman och gör en POST. Använd /api/ipcheck med key ipCheck och value ditt
             IP-nummer.</h3>
         <p>Exempel:
-            http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck?ipCheck=127.0.0.1
+            http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck/check
+            <p>key = ipCheck</p>
+            <p>value = ip-nummer</p>
         </p>
 
     </div>

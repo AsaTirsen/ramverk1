@@ -1,6 +1,6 @@
 <?php
 
-namespace Asti\Ipcheck;
+namespace Asti\Geoip;
 
 use Anax\DI\DIFactoryConfig;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test the SampleController.
  */
-class IpJsonControllerTest extends TestCase
+class GeoipJsonControllerTest extends TestCase
 {
 
     protected $di;
@@ -30,7 +30,7 @@ class IpJsonControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
-        $this->controller = new IpJsonController();
+        $this->controller = new GeoipJsonController();
         $this->controller->setDI($this->di);
     }
 
@@ -39,6 +39,7 @@ class IpJsonControllerTest extends TestCase
      */
 
     public function testIndexAction() {
+        $_SERVER['REMOTE_ADDR']= "127.0.0.1";
         $res = $this->controller->indexAction();
         $this->assertIsObject($res);
     }

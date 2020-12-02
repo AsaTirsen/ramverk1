@@ -15,16 +15,17 @@ namespace Anax\View;
         <h2>I det här API:et kan du testa en IP-adress för att se om den är giltig och vilket domännamn den
             tillhör.</h2>
         <h3>Metod 1: Använd formuläret nedan för att skriva in ditt ip-nummer</h3>
-        <h3>Metod 2: Använd en klient t.ex. Postman och gör en POST. Använd /api/ipcheck med key ipCheck och value ditt
+        <h3>Metod 2: Använd en klient t.ex. Postman och gör en POST. Använd /api/geocheck/check med key ipCheck och value ditt
             IP-nummer.</h3>
         <p>Exempel:
-            http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/ipcheck?ipCheck=127.0.0.1
+            http://localhost:8080/dbwebb/ramverk1/me/redovisa/htdocs/api/geocheck/check
+        <p>key = ipCheck</p>
+        <p>value = ip-nummer</p>
         </p>
 
     </div>
     <form method="post" action="api/geocheck/check">
         <fieldset>
-            <?= $ipAdress = ""; ?>
             <p>
                 <label>Skriv din IP-adress:</label>
                 <label>

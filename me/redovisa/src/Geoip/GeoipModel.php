@@ -19,28 +19,12 @@ class GeoipModel
             $res = $service->curlIpApi($ipAdr);
         return (object)[
             "Type" => $res["type"],
-            "Valid" => $res["type"] = "ipv4" || "ipv6",
+            "Valid" => $res["type"] ? "ipv4" || "ipv6" : "not valid",
             "UserInput" => $res["ip"],
             "Latitude" => $res["latitude"],
             "Longitude" => $res["longitude"],
-            "Country" => $res["country_code"],
+            "City" => $res["city"],
+            "Country" => $res["country_name"],
         ];
-
-//        $isIPv6 = filter_var($ipAdress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
-//        $isIPv4 = filter_var($ipAdress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
-//        if ($isIPv6 || $isIPv4) {
-//            $hostname = gethostbyaddr($ipAdress);
-//        } else {
-//            $hostname = "false";
-//        }
-//        return (object)[
-//            "Valid" => $isIPv4 || $isIPv6,
-//            "IPv4" => $isIPv4,
-//            "IPv6" => $isIPv6,
-//            "UserInput" => $ipAdress,
-//            "DomainName" => $hostname,
-//
-//        ];
-//    }
     }
 }
