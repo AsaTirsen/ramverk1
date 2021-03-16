@@ -38,6 +38,8 @@ class ForecastController implements ContainerInjectableInterface
                 $resIp = $geoipService->curlIpApi($ipAdr);
                 $resWeather = $weatherService->curlWeatherApi($resIp->Longitude, $resIp->Latitude);
                 $data = [
+                    "long" => $resIp->Longitude,
+                    "lat" => $resIp->Latitude,
                     "CurrentTemp" => $resWeather->Current["temp"],
                     "CurrentFeelsLike" => $resWeather->Current["feels_like"],
                     "CurrentWeather" => $resWeather->Current["weather"][0]["description"],
@@ -46,16 +48,20 @@ class ForecastController implements ContainerInjectableInterface
                     "DailyFeelsLike" => $help->loopThroughTemp($resWeather->Daily, "feels_like", "day"),
                     "DailyDescriptions" => $help->loopThroughDesc($resWeather->Daily, "weather", "description")
                 ];
+                error_log($data["long"]);
+                error_log($data["lat"]);
                 $page->add("weather/weather_forecast", $data);
                 return $page->render($data);
-            }
-            elseif ($getParams["type"] == "Äldre data"){
+            } elseif ($getParams["type"] == "Äldre data") {
                 $resIp = $geoipService->curlIpApi($ipAdr);
-                error_log($ipAdr);
                 $resWeather = $weatherService->curlOldWeatherApi($resIp->Longitude, $resIp->Latitude);
                 $data = [
+                    "long" => $resIp->Longitude,
+                    "lat" => $resIp->Latitude,
                     "HistoricalData" => $resWeather->DailyHistory,
                 ];
+                error_log($data["long"]);
+                error_log($data["lat"]);
                 $page->add("weather/weather_older", $data);
                 return $page->render($data);
             }
@@ -66,5 +72,37 @@ class ForecastController implements ContainerInjectableInterface
         $page->add("weather/weather_search", $data);
         return $page->render($data);
     }
-
 }
+//
+//}$help = new HelperFunctions();
+//$page = $this->di->get("page");
+//$request = $this->di->get("request");
+//$getParams = $request->getGet();
+//$geoipService = $this->di->get("geoip");
+//$weatherService = $this->di->get("weather");
+//$ipAdr = null;
+//if ($getParams) {
+//    if ($getParams["ipCheck"] = "" && $getParams["lat"] != "" && $getParams["long"] != "") {
+//        $lat = $getParams["lat"];
+//        $long = $getParams["long"];
+//    } else {
+//        $ipAdr = $getParams["ipCheck"];
+//        $resIp = $geoipService->curlIpApi($ipAdr);
+//        $resWeather = $weatherService->curlWeatherApi($resIp->Longitude, $resIp->Latitude);
+//    }
+//    error_log($lat);
+//    error_log($long);
+//    if ($getParams["type"] == "Prognos") {
+//        $data = [
+//            "long" =>  $resIp->Longitude || $long,
+//            "lat" => $resIp->Latitude || $lat,
+//            "CurrentTemp" => $resWeather->Current["temp"],
+//            "CurrentFeelsLike" => $resWeather->Current["feels_like"],
+//            "CurrentWeather" => $resWeather->Current["weather"][0]["description"],
+//            "DailyDates" => $help->loopThroughDate($resWeather->Daily),
+//            "DailyTemperatures" => $help->loopThroughTemp($resWeather->Daily, "temp", "day"),
+//            "DailyFeelsLike" => $help->loopThroughTemp($resWeather->Daily, "feels_like", "day"),
+//            "DailyDescriptions" => $help->loopThroughDesc($resWeather->Daily, "weather", "description")
+//        ];
+//        error_log($data["long"]);
+//        error_log($data["lat"]);

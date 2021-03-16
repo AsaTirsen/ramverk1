@@ -7,7 +7,28 @@ namespace Anax\View;
  */
 
 ?><article>
-    <table>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css">
+    <script src='https://unpkg.com/leaflet@1.3.3/dist/leaflet.js'></script>
+    <div id="map"></div>
+    <style>
+        #map{ height: 200px }
+    </style>
+    <script type="text/javascript">
+        var lat=<?php echo $data["lat"]; ?>;
+        var long=<?php echo $data["long"]; ?>;
+        var map = L.map('map', {
+            center: [lat, long],
+            zoom: 13
+        });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([lat, long]).addTo(map)
+    </script>
+    <p>Kartan görs med hjälp av Open Street Maps och Leaflet</p>
+
+    <table class="table">
         <h1>5 dagars historiskt väderdata</h1>
         <tr>
             <th>Dag</th>

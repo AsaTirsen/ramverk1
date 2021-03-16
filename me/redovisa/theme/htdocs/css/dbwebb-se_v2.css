@@ -6588,6 +6588,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .inner-wrap-main {
 
 }*/
+.table {
+  padding-left: 5em;
+}
 .main,
 .region-main {
   display: inline;
@@ -6876,6 +6879,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   position: absolute;
   top: 30px;
   left: 10px;
+}
+#mapid {
+  height: 180px;
 }
 @media screen and (max-width: 1750px) {
   .logo-1,

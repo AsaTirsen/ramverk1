@@ -22,6 +22,7 @@ return [
             ],
             "javascripts" => [
                 "js/responsive-menu.js",
+                'https://unpkg.com/leaflet@1.3.3/dist/leaflet.js'
             ],
         ],
     ],

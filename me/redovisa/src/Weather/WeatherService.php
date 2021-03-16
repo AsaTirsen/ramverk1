@@ -47,7 +47,6 @@ class WeatherService
         return (object)[
             "Current" => $res["current"],
             "Daily" => $res["daily"],
-            "Alerts" => $res["alerts"]
         ];
     }
     public function curlOldWeatherApi($lon, $lat) : object
@@ -58,9 +57,7 @@ class WeatherService
         for ($x = 0; $x <= 4; $x++) {
             array_push($dateArray, $currentTime -= 86400);
         }
-        Error_log($dateArray[0]);
         $res = $curl->getMultipleCurls($this->getUrl() . "/timemachine?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&dt=", $dateArray,  "&appid=" . $this->getKey());
-        error_log($res[0]["current"]["temp"]);
         return (object)[
             "DailyHistory" => $res,
         ];
