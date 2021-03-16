@@ -31,4 +31,32 @@ class HelperFunctions
             return "That is not a valid IP-adress";
         }
     }
+
+    public function loopThroughDate($dateArray): array
+    {
+        $newDateArray = [];
+        forEach ($dateArray as $date) {
+            $modifiedDate = date("Y-m-d", array_shift($date));
+            array_push($newDateArray, $modifiedDate);
+        }
+        return $newDateArray;
+    }
+    public function loopThroughTemp($dateArray, $el1, $el2): array
+    {
+        $newTempArray = [];
+        forEach ($dateArray as $temp) {
+            $modTemp = $temp[$el1][$el2];
+            array_push($newTempArray, $modTemp);
+        }
+        return $newTempArray;
+    }
+    public function loopThroughDesc($dateArray, $el1, $el2): array
+    {
+        $newDescArray = [];
+        forEach ($dateArray as $desc) {
+            $modDesc = $desc[$el1][0][$el2];
+            array_push($newDescArray, $modDesc);
+        }
+        return $newDescArray;
+    }
 }

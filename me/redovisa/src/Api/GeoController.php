@@ -5,7 +5,6 @@ namespace Asti\Api;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Asti\Geoip\GeoipModel;
 
 /**
  * A test controller to show off using a model.
@@ -35,7 +34,8 @@ class GeoController implements ContainerInjectableInterface
     {
         $request = $this->di->get("request");
         $ipAdress = $request->getPost("ipCheck");
-        $ipLookup = new GeoipModel();
-        return json_encode($ipLookup->check($ipAdress));
+        $geoipService = $this->di->get("geoip");
+        header('Content-Type: application/json');
+        return json_encode($geoipService->curlIpApi($ipAdress));
     }
 }

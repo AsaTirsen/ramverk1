@@ -9,7 +9,7 @@ return [
 
     // Services to add to the container.
     "services" => [
-        "geoip" => [
+        "weather" => [
             // Is the service shared, true or false
             // Optional, default is true
             "shared" => true,
@@ -18,21 +18,21 @@ return [
             // Create the service, load its configuration (if any)
             // and set it up.
             "callback" => function () {
-                $geoipService = new \Asti\Geoip\GeoipService();
+                $weatherService = new \Asti\Weather\WeatherService();
 
                 // Load the configuration files
                 $cfg = $this->get("configuration");
-                $config = $cfg->load("geoip.php");
+                $config = $cfg->load("weather.php");
                 $settings = $config["config"] ?? null;
 
                 if ($settings["url"] ?? null) {
-                    $geoipService->setUrl($settings["url"]);
+                    $weatherService->setUrl($settings["url"]);
                 }
                 if ($settings["API-key"] ?? null) {
-                    $geoipService->setKey($settings["API-key"]);
+                    $weatherService->setKey($settings["API-key"]);
                 }
 
-                return $geoipService;
+                return $weatherService;
             }
         ],
     ],

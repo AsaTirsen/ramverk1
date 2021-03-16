@@ -2,44 +2,56 @@
 
 namespace Asti\Geoip;
 
-use Asti\Geoip\CurlModel;
+use Anax\Commons\ContainerInjectableInterface;
+use Anax\Commons\ContainerInjectableTrait;
+use Asti\Geoip\CurlService;
 
 class GeoipService
 {
+
+
     /*
      *
      * curls api, get_file_contents
      * sends response to model
      *
      */
-//
-//    private $key = null;
-//    private $url = null;
-//
-//    public function setKey() : void
-//    {
-//        $this->key = "52ca019cf35f1e86f782ed09916211c8";
-//    }
-//
-//    public function setUrl() : void
-//    {
-//        $this->url = "http://api.ipstack.com/";
-//    }
-//
+
+    private $key = null;
+    private $url = null;
+
+    public function setKey($key)
+    {
+        $this->key = $key;
+    }
+
+    public function setUrl($url) : void
+    {
+        $this->url = $url;
+    }
 
     public function getKey() : string
     {
-        return "52ca019cf35f1e86f782ed09916211c8";
+        return $this->key;
     }
 
     public function getUrl() : string
     {
-        return "http://api.ipstack.com/";
+        return $this->url;
     }
 
-    public function curlIpApi($ipAdr) : array
+    public function curlIpApi($ipAdr) : object
     {
-        $curl = new CurlModel();
-        return $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
+        $curl = new CurlService();
+        $res = $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
+        return (object)[
+            "Type" => $res["type"],
+            "Valid" => $res["type"] ? "ipv4" || "ipv6" : "not valid",
+            "UserInput" => $res["ip"],
+            "Latitude" => $res["latitude"],
+            "Longitude" => $res["longitude"],
+            "City" => $res["city"],
+            "Country" => $res["country_name"],
+        ];
     }
 }

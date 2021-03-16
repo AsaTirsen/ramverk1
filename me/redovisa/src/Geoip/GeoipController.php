@@ -32,11 +32,11 @@ class GeoipController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $request = $this->di->get("request");
         $getParams = $request->getGet();
-        $ipLookup = new GeoipModel();
+        $geoipService = $this->di->get("geoip");
         if ($getParams) {
             $ipAdr = $getParams["ipCheck"];
             $data = [
-                "content" => json_encode($ipLookup->check($ipAdr))
+                "content" => json_encode($geoipService->curlIpApi($ipAdr))
             ];
             $page->add("geo_ip_view/geo_ip_result", $data);
             return $page->render($data);

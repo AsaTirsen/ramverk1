@@ -32,4 +32,6 @@ class GeoipJsonController implements ContainerInjectableInterface
         $page->add("geo_ip_json_view/ip_json_check", $data);
         return $page->render($data);
     }
+
+
 }
