@@ -44,6 +44,11 @@ class GeoipService
     {
         $curl = new CurlService();
         $res = $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
+        if ($res["type"] == null) {
+            return (object) [
+                "Message" => "Ipadressen är fel. Försök igen"
+            ];
+        }
         return (object)[
             "Type" => $res["type"],
             "Valid" => $res["type"] ? "ipv4" || "ipv6" : "not valid",

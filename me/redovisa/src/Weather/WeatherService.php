@@ -44,10 +44,16 @@ class WeatherService
     {
         $curl = new CurlService();
         $res = $curl->getDataThroughCurl($this->getUrl() . "?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&appid=" . $this->getKey());
-        return (object)[
-            "Current" => $res["current"],
-            "Daily" => $res["daily"],
-        ];
+        if (isset($res["cod"])) {
+            return (object) [
+                "Error" => "Platsangivelse är fel"
+            ];
+        } else {
+            return (object)[
+                "Current" => $res["current"],
+                "Daily" => $res["daily"],
+            ];
+        }
     }
     public function curlOldWeatherApi($lon, $lat) : object
     {
@@ -58,6 +64,11 @@ class WeatherService
             array_push($dateArray, $currentTime -= 86400);
         }
         $res = $curl->getMultipleCurls($this->getUrl() . "/timemachine?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&dt=", $dateArray,  "&appid=" . $this->getKey());
+        if (isset($res["cod"])) {
+            return (object) [
+                "Error" => "Platsangivelse är fel. Försök igen"
+            ];
+        }
         return (object)[
             "DailyHistory" => $res,
         ];

@@ -32,11 +32,28 @@ class ForecastController implements ContainerInjectableInterface
         $getParams = $request->getGet();
         $geoipService = $this->di->get("geoip");
         $weatherService = $this->di->get("weather");
+        $resIp = null;
+        $resWeather = null;
         if ($getParams) {
             $ipAdr = $getParams["ipCheck"];
-            if ($getParams["type"] == "Prognos") {
-                $resIp = $geoipService->curlIpApi($ipAdr);
+            $resIp = $geoipService->curlIpApi($ipAdr);
+            if (isset($resIp->Message)) {
+                $data = [
+                    "ErrorMsg" => "$resIp->Message"
+                ];
+                $page->add("weather/weather_search", $data);
+                return $page->render($data);
+            } else {
                 $resWeather = $weatherService->curlWeatherApi($resIp->Longitude, $resIp->Latitude);
+            }
+            if (isset($resWeather->Error)) {
+                $data = [
+                    "ErrorMsg" => "$resWeather->Error"
+                ];
+                $page->add("weather/weather_search", $data);
+                return $page->render($data);
+            }
+            elseif (isset($ipAdr) && isset($resWeather) && $getParams["type"] == "Prognos") {
                 $data = [
                     "long" => $resIp->Longitude,
                     "lat" => $resIp->Latitude,
@@ -48,26 +65,22 @@ class ForecastController implements ContainerInjectableInterface
                     "DailyFeelsLike" => $help->loopThroughTemp($resWeather->Daily, "feels_like", "day"),
                     "DailyDescriptions" => $help->loopThroughDesc($resWeather->Daily, "weather", "description")
                 ];
-                error_log($data["long"]);
-                error_log($data["lat"]);
                 $page->add("weather/weather_forecast", $data);
                 return $page->render($data);
-            } elseif ($getParams["type"] == "Äldre data") {
-                $resIp = $geoipService->curlIpApi($ipAdr);
+            } elseif (isset($ipAdr) && isset($resWeather) && $getParams["type"] == "Äldre data") {
                 $resWeather = $weatherService->curlOldWeatherApi($resIp->Longitude, $resIp->Latitude);
                 $data = [
                     "long" => $resIp->Longitude,
                     "lat" => $resIp->Latitude,
                     "HistoricalData" => $resWeather->DailyHistory,
                 ];
-                error_log($data["long"]);
-                error_log($data["lat"]);
+
                 $page->add("weather/weather_older", $data);
                 return $page->render($data);
             }
         }
         $data = [
-            "ipAdress" => $_SERVER['REMOTE_ADDR']
+            "ipAdress" => $_SERVER['REMOTE_ADDR'],
         ];
         $page->add("weather/weather_search", $data);
         return $page->render($data);
