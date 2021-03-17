@@ -3,3 +3,5 @@
 /vendor
 memory::
 composer.lock
+**/config/geoip.php
+**/config/weather.php
