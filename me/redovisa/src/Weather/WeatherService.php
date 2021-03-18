@@ -2,8 +2,6 @@
 
 namespace Asti\Weather;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
 use Asti\Geoip\CurlService;
 
 class WeatherService
@@ -66,7 +64,7 @@ class WeatherService
         $res = $curl->getMultipleCurls($this->getUrl() . "/timemachine?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&dt=", $dateArray,  "&appid=" . $this->getKey());
         if (isset($res["cod"])) {
             return (object) [
-                "Error" => "Platsangivelse är fel. Försök igen"
+                "Error" => "Väder kan inte ges för positionen. Försök igen"
             ];
         }
         return (object)[
