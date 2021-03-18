@@ -73,5 +73,10 @@ return [
             "url" => "weather",
             "title" => "Få väderprognos",
         ],
+        [
+            "text" => "VäderAPI",
+            "url" => "weather_api",
+            "title" => "Få väderprognos",
+        ],
     ],
 ];
