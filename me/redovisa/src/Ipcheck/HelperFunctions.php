@@ -46,7 +46,7 @@ class HelperFunctions
         $newTempArray = [];
         forEach ($dateArray as $temp) {
             $modTemp = $temp[$el1][$el2];
-            array_push($newTempArray, $modTemp);
+            array_push($newTempArray, substr($modTemp,0 ,5));
         }
         return $newTempArray;
     }

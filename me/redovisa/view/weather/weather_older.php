@@ -36,33 +36,35 @@ namespace Anax\View;
             <th>Känns som C</th>
             <th>Beskrivning</th>
         </tr>
-
         <tr>
             <td>Igår</td>
-            <td><?= $data["HistoricalData"][0]["current"]["temp"]?> C</td>
-            <td><?= $data["HistoricalData"][0]["current"]["feels_like"]?> C</td>
-            <td><?= $data["HistoricalData"][0]["current"]["weather"][0]["main"]?></td>
+            <td><?= $data["CurrentTemp1"]?> C</td>
+            <td><?= $data["CurrentFeelsLike1"]?> C</td>
+            <td><?= $data["CurrentWeather1"]?></td>
         </tr>
         <tr>
-            <td><?= date("Y-m-d", $data["HistoricalData"][1]["current"]["dt"])?></td>
-            <td><?= $data["HistoricalData"][1]["current"]["temp"]?> C</td>
-            <td><?= $data["HistoricalData"][1]["current"]["feels_like"]?> C</td>
-            <td><?= $data["HistoricalData"][1]["current"]["weather"][0]["main"]?></td>
-        </tr><tr>
-            <td><?= date("Y-m-d", $data["HistoricalData"][2]["current"]["dt"])?></td>
-            <td><?= $data["HistoricalData"][2]["current"]["temp"]?> C</td>
-            <td><?= $data["HistoricalData"][2]["current"]["feels_like"]?> C</td>
-            <td><?= $data["HistoricalData"][2]["current"]["weather"][0]["main"]?></td>
-        </tr><tr>
-            <td><?= date("Y-m-d", $data["HistoricalData"][3]["current"]["dt"])?></td>
-            <td><?= $data["HistoricalData"][3]["current"]["temp"]?> C</td>
-            <td><?= $data["HistoricalData"][3]["current"]["feels_like"]?> C</td>
-            <td><?= $data["HistoricalData"][3]["current"]["weather"][0]["main"]?></td>
-        </tr><tr>
-            <td><?= date("Y-m-d", $data["HistoricalData"][4]["current"]["dt"])?></td>
-            <td><?= $data["HistoricalData"][4]["current"]["temp"]?> C</td>
-            <td><?= $data["HistoricalData"][4]["current"]["feels_like"]?> C</td>
-            <td><?= $data["HistoricalData"][4]["current"]["weather"][0]["main"]?></td>
+            <td><?= $data["Date2"]?></td>
+            <td><?= $data["CurrentTemp2"]?> C</td>
+            <td><?= $data["CurrentFeelsLike2"]?> C</td>
+            <td><?= $data["CurrentWeather2"]?></td>
+        </tr>
+        <tr>
+            <td><?= $data["Date3"]?></td>
+            <td><?= $data["CurrentTemp3"]?> C</td>
+            <td><?= $data["CurrentFeelsLike3"]?> C</td>
+            <td><?= $data["CurrentWeather3"]?></td>
+        </tr>
+        <tr>
+            <td><?= $data["Date4"]?></td>
+            <td><?= $data["CurrentTemp4"]?> C</td>
+            <td><?= $data["CurrentFeelsLike4"]?> C</td>
+            <td><?= $data["CurrentWeather4"]?></td>
+        </tr>
+        <tr>
+            <td><?= $data["Date5"]?></td>
+            <td><?= $data["CurrentTemp5"]?> C</td>
+            <td><?= $data["CurrentFeelsLike5"]?> C</td>
+            <td><?= $data["CurrentWeather5"]?></td>
         </tr>
 
     </table>

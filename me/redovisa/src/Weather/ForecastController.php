@@ -57,13 +57,13 @@ class ForecastController implements ContainerInjectableInterface
                 $data = [
                     "long" => $resIp->Longitude,
                     "lat" => $resIp->Latitude,
-                    "CurrentTemp" => $resWeather->Current["temp"],
-                    "CurrentFeelsLike" => $resWeather->Current["feels_like"],
-                    "CurrentWeather" => $resWeather->Current["weather"][0]["description"],
-                    "DailyDates" => $help->loopThroughDate($resWeather->Daily),
-                    "DailyTemperatures" => $help->loopThroughTemp($resWeather->Daily, "temp", "day"),
-                    "DailyFeelsLike" => $help->loopThroughTemp($resWeather->Daily, "feels_like", "day"),
-                    "DailyDescriptions" => $help->loopThroughDesc($resWeather->Daily, "weather", "description")
+                    "CurrentTemp" => $resWeather->CurrentTemp,
+                    "CurrentFeelsLike" => $resWeather->CurrentFeelsLike,
+                    "CurrentWeather" => $resWeather->CurrentWeather,
+                    "DailyDates" => $resWeather->DailyDates,
+                    "DailyTemperatures" => $resWeather->DailyTemperatures,
+                    "DailyFeelsLike" => $resWeather->DailyFeelsLike,
+                    "DailyDescriptions" => $resWeather->DailyDescriptions
                 ];
                 $page->add("weather/weather_forecast", $data);
                 return $page->render($data);
@@ -72,7 +72,26 @@ class ForecastController implements ContainerInjectableInterface
                 $data = [
                     "long" => $resIp->Longitude,
                     "lat" => $resIp->Latitude,
-                    "HistoricalData" => $resWeather->DailyHistory,
+                    "Date1" => $resWeather->Date1,
+                    "CurrentTemp1" => $resWeather->CurrentTemp1,
+                    "CurrentFeelsLike1" => $resWeather->CurrentFeelsLike1,
+                    "CurrentWeather1" => $resWeather->CurrentWeather1,
+                    "Date2" => $resWeather->Date2,
+                    "CurrentTemp2" => $resWeather->CurrentTemp2,
+                    "CurrentFeelsLike2" => $resWeather->CurrentFeelsLike2,
+                    "CurrentWeather2" => $resWeather->CurrentWeather2,
+                    "Date3" => $resWeather->Date3,
+                    "CurrentTemp3" => $resWeather->CurrentTemp3,
+                    "CurrentFeelsLike3" => $resWeather->CurrentFeelsLike3,
+                    "CurrentWeather3" => $resWeather->CurrentWeather3,
+                    "Date4" => $resWeather->Date4,
+                    "CurrentTemp4" => $resWeather->CurrentTemp4,
+                    "CurrentFeelsLike4" => $resWeather->CurrentFeelsLike4,
+                    "CurrentWeather4" => $resWeather->CurrentWeather4,
+                    "Date5" => $resWeather->Date5,
+                    "CurrentTemp5" => $resWeather->CurrentTemp5,
+                    "CurrentFeelsLike5" => $resWeather->CurrentFeelsLike5,
+                    "CurrentWeather5" => $resWeather->CurrentWeather5,
                 ];
 
                 $page->add("weather/weather_older", $data);
