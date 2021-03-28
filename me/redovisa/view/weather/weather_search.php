@@ -20,13 +20,6 @@ if (isset($data["ErrorMsg"])) : ?>
                     <input type="text" name="ipCheck" value="<?= $ipAdress?>"/>
                 </label>
             </p>
-            <!--        <p>-->
-            <!--            <label>Eller skriv latitud och longitud för stället du vill ha väder för:</label>-->
-            <!--            <label>-->
-            <!--                <input type="text" name="lat" value="--><?//= $lat?><!--"/>-->
-            <!--                <input type="text" name="long" value="--><?//= $long?><!--"/>-->
-            <!--            </label>-->
-            <!--        </p>-->
             <p>
                 <input type="submit" name="type" value="Prognos">
                 <input type="submit" name="type" value="Äldre data">
@@ -45,13 +38,6 @@ if (isset($data["ErrorMsg"])) : ?>
                 <input type="text" name="ipCheck" value="<?= $ipAdress?>"/>
             </label>
         </p>
-<!--        <p>-->
-<!--            <label>Eller skriv latitud och longitud för stället du vill ha väder för:</label>-->
-<!--            <label>-->
-<!--                <input type="text" name="lat" value="--><?//= $lat?><!--"/>-->
-<!--                <input type="text" name="long" value="--><?//= $long?><!--"/>-->
-<!--            </label>-->
-<!--        </p>-->
         <p>
             <input type="submit" name="type" value="Prognos">
             <input type="submit" name="type" value="Äldre data">

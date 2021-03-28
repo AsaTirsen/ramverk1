@@ -21,30 +21,20 @@ class WeatherApiController implements ContainerInjectableInterface
 
 //    }
 
-    public function weatherActionPost()
+    public function weatherActionPost() : array
     {
         $request = $this->di->get("request");
         $geoipService = $this->di->get("geoip");
         $weatherService = $this->di->get("weather");
-        $ipAdress =$request->getPost("ipCheck");
+        $ipAdress = $request->getPost("ipCheck");
         $res = $geoipService->curlIpApi($ipAdress);
-        if (isset($res->Message)) {
-            $msg = json_encode([
-                "Message" => "Ipadressen är fel. Försök igen"
-            ]);
-            header('Content-Type: application/json');
-            return $msg;
+        if (isset($res["Message"])) {
+            return [$res];
         }
-        if (in_array("Prognos", $request->getPost()))
-        {
-            $resWeather = json_encode($weatherService->curlWeatherApi($res->Longitude, $res->Latitude));
-            header('Content-Type: application/json');
-            return $resWeather;
-        } elseif ((in_array("Äldre data", $request->getPost())))
-        {
-            $resWeather = json_encode($weatherService->curlOldWeatherApi($res->Longitude, $res->Latitude));
-            header('Content-Type: application/json');
-            return $resWeather;
+        if (in_array("Prognos", $request->getPost())) {
+            return [$weatherService->curlWeatherApi($res[0]["Longitude"], $res[0]["Latitude"])];
+        } elseif ((in_array("Äldre data", $request->getPost()))) {
+            return [$weatherService->curlOldWeatherApi($res[0]["Longitude"], $res[0]["Latitude"])];
         }
     }
 }

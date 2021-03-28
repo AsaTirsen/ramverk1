@@ -5,6 +5,9 @@
     <testsuites>
         <testsuite name="all">
             <directory>test</directory>
+            <exclude>test/Mock</exclude>
+            <exclude>test/Weather/GeoIpServiceMock.php</exclude>
+            <exclude>test/Weather/WeatherServiceMock.php</exclude>
         </testsuite>
     </testsuites>
 

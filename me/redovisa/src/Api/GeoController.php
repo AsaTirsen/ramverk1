@@ -14,28 +14,14 @@ class GeoController implements ContainerInjectableInterface
     use ContainerInjectableTrait;
 
     /**
-     * function checks if input is an ip address and if so, if it's PIv4 or Ipv6
+     * function uses ip adress from post as aprameter to curl API
      */
-//    public function indexAction()
-//    {
-
-//    }
-
-//    public function checkActionPost()
-//    {
-//        $request = $this->di->get("request");
-//        $ipAdress =$request->getPost("ipCheck");
-//        $ipCheck = new IpCheck();
-//        $res = json_encode($ipCheck->check($ipAdress));
-//        return $res;
-//    }
 
     public function checkActionPost()
     {
         $request = $this->di->get("request");
         $ipAdress = $request->getPost("ipCheck");
         $geoipService = $this->di->get("geoip");
-        header('Content-Type: application/json');
-        return json_encode($geoipService->curlIpApi($ipAdress));
+        return [$geoipService->curlIpApi($ipAdress)];
     }
 }

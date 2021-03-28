@@ -14,8 +14,8 @@ namespace Anax\View;
         #map{ height: 200px }
     </style>
     <script type="text/javascript">
-        var lat=<?php echo $data["lat"]; ?>;
-        var long=<?php echo $data["long"]; ?>;
+        var lat=<?php echo $data[0]["lat"]; ?>;
+        var long=<?php echo $data[0]["long"]; ?>;
         var map = L.map('map', {
             center: [lat, long],
             zoom: 13
@@ -27,7 +27,6 @@ namespace Anax\View;
         L.marker([lat, long]).addTo(map)
     </script>
     <p>Kartan görs med hjälp av Open Street Maps och Leaflet</p>
-
     <table class="table">
         <h1>5 dagars historiskt väderdata</h1>
         <tr>
@@ -38,36 +37,33 @@ namespace Anax\View;
         </tr>
         <tr>
             <td>Igår</td>
-            <td><?= $data["CurrentTemp1"]?> C</td>
-            <td><?= $data["CurrentFeelsLike1"]?> C</td>
-            <td><?= $data["CurrentWeather1"]?></td>
+            <td><?= $data[0]["CurrentTemp1"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike1"]?> C</td>
+            <td><?= $data[0]["CurrentWeather1"]?></td>
         </tr>
         <tr>
-            <td><?= $data["Date2"]?></td>
-            <td><?= $data["CurrentTemp2"]?> C</td>
-            <td><?= $data["CurrentFeelsLike2"]?> C</td>
-            <td><?= $data["CurrentWeather2"]?></td>
+            <td><?= $data[0]["Date2"]?></td>
+            <td><?= $data[0]["CurrentTemp2"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike2"]?> C</td>
+            <td><?= $data[0]["CurrentWeather2"]?></td>
         </tr>
         <tr>
-            <td><?= $data["Date3"]?></td>
-            <td><?= $data["CurrentTemp3"]?> C</td>
-            <td><?= $data["CurrentFeelsLike3"]?> C</td>
-            <td><?= $data["CurrentWeather3"]?></td>
+            <td><?= $data[0]["Date3"]?></td>
+            <td><?= $data[0]["CurrentTemp3"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike3"]?> C</td>
+            <td><?= $data[0]["CurrentWeather3"]?></td>
         </tr>
         <tr>
-            <td><?= $data["Date4"]?></td>
-            <td><?= $data["CurrentTemp4"]?> C</td>
-            <td><?= $data["CurrentFeelsLike4"]?> C</td>
-            <td><?= $data["CurrentWeather4"]?></td>
+            <td><?= $data[0]["Date4"]?></td>
+            <td><?= $data[0]["CurrentTemp4"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike4"]?> C</td>
+            <td><?= $data[0]["CurrentWeather4"]?></td>
         </tr>
         <tr>
-            <td><?= $data["Date5"]?></td>
-            <td><?= $data["CurrentTemp5"]?> C</td>
-            <td><?= $data["CurrentFeelsLike5"]?> C</td>
-            <td><?= $data["CurrentWeather5"]?></td>
+            <td><?= $data[0]["Date5"]?></td>
+            <td><?= $data[0]["CurrentTemp5"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike5"]?> C</td>
+            <td><?= $data[0]["CurrentWeather5"]?></td>
         </tr>
-
     </table>
-
-
 </article>

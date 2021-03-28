@@ -25,38 +25,49 @@ class GeoipService
         $this->key = $key;
     }
 
-    public function setUrl($url) : void
+    public function setUrl($url): void
     {
         $this->url = $url;
     }
 
-    public function getKey() : string
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
 
-    public function curlIpApi($ipAdr) : object
+    public function curlIpApi($ipAdr): array
     {
         $curl = new CurlService();
-        $res = $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
-        if ($res["type"] == null) {
-            return (object) [
-                "Message" => "Ipadressen är fel. Försök igen"
+        if ($ipAdr!= "") {
+            $res = $curl->getDataThroughCurl($this->getUrl() . $ipAdr . "?access_key=" . $this->getKey());
+
+            if ($res["type"] == null) {
+                $json = [
+                    "Message" => "IP-adressen är fel. Försök igen!"
+                ];
+                return $json;
+            }
+            $json = [
+                "Type" => $res["type"],
+                "Valid" => $res["type"] ? "ipv4" || "ipv6" : "not valid",
+                "UserInput" => $res["ip"],
+                "Latitude" => $res["latitude"],
+                "Longitude" => $res["longitude"],
+                "City" => $res["city"],
+                "Country" => $res["country_name"],
             ];
+            return [$json];
         }
-        return (object)[
-            "Type" => $res["type"],
-            "Valid" => $res["type"] ? "ipv4" || "ipv6" : "not valid",
-            "UserInput" => $res["ip"],
-            "Latitude" => $res["latitude"],
-            "Longitude" => $res["longitude"],
-            "City" => $res["city"],
-            "Country" => $res["country_name"],
-        ];
+        else {
+            $json = [
+                "Message" => "IP-adressen är tom. Försök igen"
+            ];
+            return $json;
+        }
     }
 }

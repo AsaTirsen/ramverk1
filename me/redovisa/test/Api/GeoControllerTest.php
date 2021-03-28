@@ -31,6 +31,7 @@ class GeoControllerTest extends TestCase
         $di = $this->di;
 
         // Setup the controller
+        $geoipService = $this->di->get("geoip");
         $this->controller = new GeoController();
         $this->controller->setDI($this->di);
     }
@@ -41,18 +42,22 @@ class GeoControllerTest extends TestCase
 
     public function testCheckActionPost() {
         $req = new Request();
-        $req->setPost("ipCheck", "127.0.0.1");
+        $req->setPost("ipCheck", "172.217.14.196");
         $this->di->set("request", $req);
         $res = $this->controller->checkActionPost();
-        $this->assertContains('"UserInput":"127.0.0.1"', $res);
+//        error_log($res[0][0]["UserInput"]);
+        $this->assertContains("172.217.14.196", $res[0][0]["UserInput"]);
+        $this->assertContains("ipv4", $res[0][0]["Type"]);
         $req->setPost("ipCheck", "12");
         $this->di->set("request", $req);
         $res = $this->controller->checkActionPost();
-        $this->assertContains('"Type":null', $res);
+//        error_log($res[0]["Message"]);
+        $this->assertContains("IP-adressen är fel. Försök igen", $res[0]["Message"]);
         $req->setPost("ipCheck", "2607:f8b0:4004:80a::200e");
         $this->di->set("request", $req);
         $res = $this->controller->checkActionPost();
-        $this->assertContains('"Type":"ipv6"', $res);
-
+        $this->assertContains("2607:f8b0:4004:80a::200e", $res[0][0]["UserInput"]);
+        $this->assertContains('"Type":"ipv6"', $res[0][0]);
     }
 }
+

@@ -37,7 +37,6 @@ class CurlService
 
         foreach($dateArray as $i => $date) {
             $URL = $fetchURL . $date . $fetchURLPart2;
-            error_log($URL);
             $multiCurl[$i] = curl_init();
             curl_setopt($multiCurl[$i], CURLOPT_URL, $URL);
             curl_setopt($multiCurl[$i], CURLOPT_HEADER, 0);
@@ -51,7 +50,6 @@ class CurlService
 
         foreach ($multiCurl as $k => $ch) {
             $result[$k] = curl_multi_getcontent($ch);
-            error_log(json_decode($result[$k][0]));
             array_push($curlArray, json_decode($result[$k], true));
             curl_multi_remove_handle($mh, $ch);
         }

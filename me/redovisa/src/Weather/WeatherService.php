@@ -39,19 +39,17 @@ class WeatherService
         return $this->url;
     }
 
-    public function curlWeatherApi($lon, $lat) : object
+    public function curlWeatherApi($lon, $lat) : array
     {
         $curl = new CurlService();
         $help = new HelperFunctions();
         $res = $curl->getDataThroughCurl($this->getUrl() . "?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&appid=" . $this->getKey());
         if (isset($res["cod"])) {
-            return (object) [
+            return [
                 "Error" => "Platsangivelse är fel"
             ];
         } else {
-            return (object)[
-//                "Current" => $res["current"],
-//                "Daily" => $res["daily"],
+            $json = [
                 "CurrentTemp" => substr($res["current"]["temp"], 0, 5),
                 "CurrentFeelsLike" => substr($res["current"]["feels_like"], 0, 5),
                 "CurrentWeather" => $res["current"]["weather"][0]["description"],
@@ -60,9 +58,10 @@ class WeatherService
                 "DailyFeelsLike" => $help->loopThroughTemp($res["daily"], "feels_like", "day"),
                 "DailyDescriptions" => $help->loopThroughDesc($res["daily"], "weather", "description")
             ];
+            return [$json];
         }
     }
-    public function curlOldWeatherApi($lon, $lat) : object
+    public function curlOldWeatherApi($lon, $lat) : array
     {
         $curl = new CurlService();
         $dateArray = [];
@@ -72,12 +71,11 @@ class WeatherService
         }
         $res = $curl->getMultipleCurls($this->getUrl() . "/timemachine?" . "lat=" . $lat . "&lon=" . $lon . "&units=metric" . "&lang=sv" . "&dt=", $dateArray,  "&appid=" . $this->getKey());
         if (isset($res["cod"])) {
-            return (object) [
+            return [
                 "Error" => "Väder kan inte ges för positionen. Försök igen"
             ];
         }
-        error_log($res[0]["current"]["temp"]);
-        return (object) [
+        $json =  [
             "Date1" => date("Y-m-d", $res[0]["current"]["dt"]),
             "CurrentTemp1" => substr($res[0]["current"]["temp"], 0, 5),
             "CurrentFeelsLike1" => substr($res[0]["current"]["feels_like"], 0, 5),
@@ -99,5 +97,6 @@ class WeatherService
             "CurrentFeelsLike5" =>  substr($res[4]["current"]["feels_like"], 0, 5),
             "CurrentWeather5" => $res[4]["current"]["weather"][0]["main"]
         ];
+        return [$json];
     }
 }

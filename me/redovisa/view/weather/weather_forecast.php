@@ -14,9 +14,9 @@ namespace Anax\View;
             #map{ height: 200px }
         </style>
         <script type="text/javascript">
-            var lat=<?php echo $data["lat"]; ?>;
-            var long=<?php echo $data["long"]; ?>;
-            var map = L.map('map', {
+            let lat=<?php echo $data[0]["lat"]; ?>;
+            let long=<?php echo $data[0]["long"]; ?>;
+            let map = L.map('map', {
                 center: [lat, long],
                 zoom: 13
             });
@@ -40,51 +40,51 @@ namespace Anax\View;
         </tr>
         <tr>
             <td>Just nu</td>
-            <td><?= $data["CurrentTemp"]?> C</td>
-            <td><?= $data["CurrentFeelsLike"] ?> C</td>
-            <td><?= $data["CurrentWeather"]?></td>
+            <td><?= $data[0]["CurrentTemp"]?> C</td>
+            <td><?= $data[0]["CurrentFeelsLike"] ?> C</td>
+            <td><?= $data[0]["CurrentWeather"]?></td>
         </tr>
         <tr>
             <td>Imorgon</td>
-            <td><?= array_values($data["DailyTemperatures"])[1]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[1]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[1]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[1]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[1]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[1]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[2]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[2]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[2]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[2]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[2]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[2]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[2]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[2]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[3]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[3]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[3]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[3]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[3]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[3]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[3]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[3]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[4]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[4]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[4]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[4]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[4]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[4]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[4]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[4]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[5]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[5]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[5]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[5]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[5]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[5]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[5]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[5]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[6]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[6]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[6]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[6]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[6]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[6]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[6]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[6]?></td>
         </tr>
         <tr>
-            <td><?= array_values($data["DailyDates"])[7]?></td>
-            <td><?= array_values($data["DailyTemperatures"])[7]?> C</td>
-            <td><?= array_values($data["DailyFeelsLike"])[7]?> C</td>
-            <td><?= array_values($data["DailyDescriptions"])[7]?></td>
+            <td><?= array_values($data[0]["DailyDates"])[7]?></td>
+            <td><?= array_values($data[0]["DailyTemperatures"])[7]?> C</td>
+            <td><?= array_values($data[0]["DailyFeelsLike"])[7]?> C</td>
+            <td><?= array_values($data[0]["DailyDescriptions"])[7]?></td>
         </tr>
     </table>
 

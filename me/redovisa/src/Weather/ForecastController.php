@@ -26,7 +26,6 @@ class ForecastController implements ContainerInjectableInterface
 
     public function indexAction(): object
     {
-        $help = new HelperFunctions();
         $page = $this->di->get("page");
         $request = $this->di->get("request");
         $getParams = $request->getGet();
@@ -37,65 +36,65 @@ class ForecastController implements ContainerInjectableInterface
         if ($getParams) {
             $ipAdr = $getParams["ipCheck"];
             $resIp = $geoipService->curlIpApi($ipAdr);
-            if (isset($resIp->Message)) {
+            if (isset($resIp["Message"])) {
                 $data = [
-                    "ErrorMsg" => "$resIp->Message"
+                    "ErrorMsg" => $resIp["Message"]
                 ];
                 $page->add("weather/weather_search", $data);
                 return $page->render($data);
             } else {
-                $resWeather = $weatherService->curlWeatherApi($resIp->Longitude, $resIp->Latitude);
+                $resWeather = $weatherService->curlWeatherApi($resIp[0]["Longitude"], $resIp[0]["Latitude"]);
             }
             if (isset($resWeather->Error)) {
                 $data = [
-                    "ErrorMsg" => "$resWeather->Error"
+                    "ErrorMsg" => $resWeather["Error"]
                 ];
                 $page->add("weather/weather_search", $data);
                 return $page->render($data);
             }
-            elseif (isset($ipAdr) && isset($resWeather) && $getParams["type"] == "Prognos") {
+            elseif (isset($ipAdr) && isset($resWeather) && in_array("Prognos", $getParams)) {
                 $data = [
-                    "long" => $resIp->Longitude,
-                    "lat" => $resIp->Latitude,
-                    "CurrentTemp" => $resWeather->CurrentTemp,
-                    "CurrentFeelsLike" => $resWeather->CurrentFeelsLike,
-                    "CurrentWeather" => $resWeather->CurrentWeather,
-                    "DailyDates" => $resWeather->DailyDates,
-                    "DailyTemperatures" => $resWeather->DailyTemperatures,
-                    "DailyFeelsLike" => $resWeather->DailyFeelsLike,
-                    "DailyDescriptions" => $resWeather->DailyDescriptions
+                    "long" => $resIp[0]["Longitude"],
+                    "lat" => $resIp[0]["Latitude"],
+                    "CurrentTemp" => $resWeather[0]["CurrentTemp"],
+                    "CurrentFeelsLike" => $resWeather[0]["CurrentFeelsLike"],
+                    "CurrentWeather" => $resWeather[0]["CurrentWeather"],
+                    "DailyDates" => $resWeather[0]["DailyDates"],
+                    "DailyTemperatures" => $resWeather[0]["DailyTemperatures"],
+                    "DailyFeelsLike" => $resWeather[0]["DailyFeelsLike"],
+                    "DailyDescriptions" => $resWeather[0]["DailyDescriptions"]
                 ];
-                $page->add("weather/weather_forecast", $data);
-                return $page->render($data);
-            } elseif (isset($ipAdr) && isset($resWeather) && $getParams["type"] == "Äldre data") {
-                $resWeather = $weatherService->curlOldWeatherApi($resIp->Longitude, $resIp->Latitude);
+                $page->add("weather/weather_forecast", [$data]);
+                return $page->render([$data]);
+            } elseif (isset($ipAdr) && isset($resWeather) && in_array("Äldre data", $getParams)) {
+                $resWeather = $weatherService->curlOldWeatherApi($resIp[0]["Longitude"], $resIp[0]["Latitude"]);
                 $data = [
-                    "long" => $resIp->Longitude,
-                    "lat" => $resIp->Latitude,
-                    "Date1" => $resWeather->Date1,
-                    "CurrentTemp1" => $resWeather->CurrentTemp1,
-                    "CurrentFeelsLike1" => $resWeather->CurrentFeelsLike1,
-                    "CurrentWeather1" => $resWeather->CurrentWeather1,
-                    "Date2" => $resWeather->Date2,
-                    "CurrentTemp2" => $resWeather->CurrentTemp2,
-                    "CurrentFeelsLike2" => $resWeather->CurrentFeelsLike2,
-                    "CurrentWeather2" => $resWeather->CurrentWeather2,
-                    "Date3" => $resWeather->Date3,
-                    "CurrentTemp3" => $resWeather->CurrentTemp3,
-                    "CurrentFeelsLike3" => $resWeather->CurrentFeelsLike3,
-                    "CurrentWeather3" => $resWeather->CurrentWeather3,
-                    "Date4" => $resWeather->Date4,
-                    "CurrentTemp4" => $resWeather->CurrentTemp4,
-                    "CurrentFeelsLike4" => $resWeather->CurrentFeelsLike4,
-                    "CurrentWeather4" => $resWeather->CurrentWeather4,
-                    "Date5" => $resWeather->Date5,
-                    "CurrentTemp5" => $resWeather->CurrentTemp5,
-                    "CurrentFeelsLike5" => $resWeather->CurrentFeelsLike5,
-                    "CurrentWeather5" => $resWeather->CurrentWeather5,
+                    "long" => $resIp[0]["Longitude"],
+                    "lat" => $resIp[0]["Latitude"],
+                    "Date1" => $resWeather[0]["Date1"],
+                    "CurrentTemp1" => $resWeather[0]["CurrentTemp1"],
+                    "CurrentFeelsLike1" => $resWeather[0]["CurrentFeelsLike1"],
+                    "CurrentWeather1" => $resWeather[0]["CurrentWeather1"],
+                    "Date2" => $resWeather[0]["Date2"],
+                    "CurrentTemp2" => $resWeather[0]["CurrentTemp2"],
+                    "CurrentFeelsLike2" => $resWeather[0]["CurrentFeelsLike2"],
+                    "CurrentWeather2" => $resWeather[0]["CurrentWeather2"],
+                    "Date3" => $resWeather[0]["Date3"],
+                    "CurrentTemp3" => $resWeather[0]["CurrentTemp3"],
+                    "CurrentFeelsLike3" => $resWeather[0]["CurrentFeelsLike3"],
+                    "CurrentWeather3" => $resWeather[0]["CurrentWeather3"],
+                    "Date4" => $resWeather[0]["Date4"],
+                    "CurrentTemp4" => $resWeather[0]["CurrentTemp4"],
+                    "CurrentFeelsLike4" => $resWeather[0]["CurrentFeelsLike4"],
+                    "CurrentWeather4" => $resWeather[0]["CurrentWeather4"],
+                    "Date5" => $resWeather[0]["Date5"],
+                    "CurrentTemp5" => $resWeather[0]["CurrentTemp5"],
+                    "CurrentFeelsLike5" => $resWeather[0]["CurrentFeelsLike5"],
+                    "CurrentWeather5" => $resWeather[0]["CurrentWeather5"]
                 ];
 
-                $page->add("weather/weather_older", $data);
-                return $page->render($data);
+                $page->add("weather/weather_older", [$data]);
+                return $page->render([$data]);
             }
         }
         $data = [
@@ -105,36 +104,3 @@ class ForecastController implements ContainerInjectableInterface
         return $page->render($data);
     }
 }
-//
-//}$help = new HelperFunctions();
-//$page = $this->di->get("page");
-//$request = $this->di->get("request");
-//$getParams = $request->getGet();
-//$geoipService = $this->di->get("geoip");
-//$weatherService = $this->di->get("weather");
-//$ipAdr = null;
-//if ($getParams) {
-//    if ($getParams["ipCheck"] = "" && $getParams["lat"] != "" && $getParams["long"] != "") {
-//        $lat = $getParams["lat"];
-//        $long = $getParams["long"];
-//    } else {
-//        $ipAdr = $getParams["ipCheck"];
-//        $resIp = $geoipService->curlIpApi($ipAdr);
-//        $resWeather = $weatherService->curlWeatherApi($resIp->Longitude, $resIp->Latitude);
-//    }
-//    error_log($lat);
-//    error_log($long);
-//    if ($getParams["type"] == "Prognos") {
-//        $data = [
-//            "long" =>  $resIp->Longitude || $long,
-//            "lat" => $resIp->Latitude || $lat,
-//            "CurrentTemp" => $resWeather->Current["temp"],
-//            "CurrentFeelsLike" => $resWeather->Current["feels_like"],
-//            "CurrentWeather" => $resWeather->Current["weather"][0]["description"],
-//            "DailyDates" => $help->loopThroughDate($resWeather->Daily),
-//            "DailyTemperatures" => $help->loopThroughTemp($resWeather->Daily, "temp", "day"),
-//            "DailyFeelsLike" => $help->loopThroughTemp($resWeather->Daily, "feels_like", "day"),
-//            "DailyDescriptions" => $help->loopThroughDesc($resWeather->Daily, "weather", "description")
-//        ];
-//        error_log($data["long"]);
-//        error_log($data["lat"]);
