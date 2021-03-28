@@ -8,6 +8,8 @@
             <exclude>test/Mock</exclude>
             <exclude>test/Weather/GeoIpServiceMock.php</exclude>
             <exclude>test/Weather/WeatherServiceMock.php</exclude>
+            <exclude>test/Mock/101_weatherApiControllerMock.php</exclude>
+            <exclude>test/Api/WeatherApiControllerMockTest.php</exclude>
         </testsuite>
     </testsuites>
 

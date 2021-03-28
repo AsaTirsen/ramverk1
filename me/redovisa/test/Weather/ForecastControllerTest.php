@@ -3,9 +3,6 @@
 namespace Asti\Weather;
 
 use Anax\DI\DIFactoryConfig;
-use Anax\Request\Request;
-use Asti\Geoip\GeoipService;
-use Asti\Weather\WeatherService;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -47,6 +44,7 @@ class ForecastControllerTest extends TestCase
         $request->setGet("ipCheck", "172.217.14.196&type=Prognos");
         $resWeather = $this->controller->indexAction();
         $this->assertIsObject($resWeather);
-        $this->assertObjectHasAttribute("CurrentTemp", $resWeather);
+        $request->setGet("ipCheck", "172.217.14.196&type=Äldre data");
+        $this->assertIsObject($resWeather);
     }
 }

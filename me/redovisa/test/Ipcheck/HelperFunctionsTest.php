@@ -30,5 +30,7 @@ class HelperFunctionsTest extends TestCase
         $this->assertContains( "That is not a valid IP-adress", $data);
         $data = ["ipAdress" => $this->HelperFunctions->checkWhichTypeOfIp('2607:f8b0:4004:80a::200e')];
         $this->assertContains( "That is an IPv6 address with the domain name: iad23s40-in-x0e.1e100.net", $data);
+        $data = [$this->HelperFunctions->loopThroughDate([[1616950800]])];
+        $this->assertContains("2021-03-28", $data[0]);
     }
 }

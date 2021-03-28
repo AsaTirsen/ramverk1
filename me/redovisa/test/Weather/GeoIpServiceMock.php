@@ -4,11 +4,9 @@ namespace Asti\Weather;
 
 use Asti\Mock\ipResMock;
 use Asti\Geoip\GeoipService;
-use Asti\Ipcheck\HelperFunctions;
-use PHPUnit\Framework\TestCase;
 
 
-class GeoIpServiceMock
+class GeoIpServiceMock extends GeoipService
 {
     public function curlIpApi($ipAdr): array
     {
