@@ -39,6 +39,8 @@ class WeatherService
         return $this->url;
     }
 
+
+
     public function curlWeatherApi($lon, $lat) : array
     {
         $curl = new CurlService();
@@ -61,6 +63,7 @@ class WeatherService
             return [$json];
         }
     }
+
     public function curlOldWeatherApi($lon, $lat) : array
     {
         $curl = new CurlService();

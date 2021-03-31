@@ -2,10 +2,6 @@
 
 namespace Asti\Geoip;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
-use Asti\Geoip\CurlService;
-
 class GeoipService
 {
 
@@ -39,6 +35,9 @@ class GeoipService
     {
         return $this->url;
     }
+
+
+
 
     public function curlIpApi($ipAdr): array
     {

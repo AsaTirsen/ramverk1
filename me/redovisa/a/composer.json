@@ -10,7 +10,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/AsaTirsen/a"
+            "url": "https://github.com/AsaTirsen/ramverk1/tree/3.1.0/me/redovisa/a"
         }
     ],
     "require": {

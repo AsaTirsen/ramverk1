@@ -3,8 +3,6 @@
  * Configuration file for DI container.
  */
 
-use Asti\Geoip\GeoipService;
-
 return [
 
     // Services to add to the container.
