@@ -2,7 +2,7 @@
 
 namespace Asti\Weather;
 
-use Asti\Api\WeatherResMock;
+use Asti\Mock\WeatherResMock;
 use Asti\Geoip\CurlService;
 use Asti\Ipcheck\HelperFunctions;
 use PHPUnit\Framework\TestCase;
@@ -10,6 +10,19 @@ use PHPUnit\Framework\TestCase;
 
 class WeatherServiceMock extends WeatherService
 {
+    private $key = "nvopegnpwrnhrpwohn";
+    private $url = "yadayada.com";
+
+
+    public function getKey() : string
+    {
+        return $this->key;
+    }
+
+    public function getUrl() : string
+    {
+        return $this->url;
+    }
     public function curlWeatherApi($lon, $lat) : array
     {
         $mockWeather = new WeatherResMock();
